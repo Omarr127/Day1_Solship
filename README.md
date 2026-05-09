@@ -127,12 +127,11 @@ LGBMRegressor(
 
 | Model | Period | RMSE (kW) | MAE (kW) | NRMSE (%) |
 |---|---|---|---|---|
-| LightGBM | April 2025 | 0.0746 | — | — |
-| LightGBM | September 2025 | 0.0635 | — | — |
+| LightGBM | April 2025 | 0.0746 |  MAE   : 0.0381 kW |  NRMSE : 7.7404 % |
+| LightGBM | September 2025 | 0.0635 |   MAE   : 0.0331 kW | NRMSE : 7.5726 % |
 
-> Fill in remaining values after running Notebook 2.
 
----
+
 
 ## 📐 Evaluation Metrics
 
