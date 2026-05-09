@@ -15,58 +15,9 @@ Residential site in Italy with:
 
 ---
 
-## 🗂️ Repository Structure
-
-```
-solship_hackathon/
-│
-├── README.md                          ← This file
-├── requirements.txt                   ← All dependencies
-│
-├── Notebook1_EDA_Features.ipynb       ← EDA + Feature Engineering (2024 & 2025)
-├── Notebook2_Forecaster.ipynb         ← XGBoost + LightGBM + Ensemble models
-│
-├── data/
-│   ├── ENERGY_Hackathon_DataSet_Sheet1_.csv   ← Raw dataset (2024–2025)
-│   ├── Weather_2024.csv                       ← Sondrio weather 2024
-│   └── Weather_2025.csv                       ← Sondrio weather 2025
-│
-├── outputs/
-│   ├── features_2024.csv              ← Engineered features (2024 training)
-│   ├── features_2025.csv              ← Engineered features (2025 test)
-│   ├── feature_cols.json              ← Feature column names
-│   └── forecast_2025_apr_sep.csv      ← Final forecast (April + September 2025)
-│
-└── plots/
-    ├── eda_01_overview.png
-    ├── eda_02_heatmap.png
-    ├── eda_08_weather.png
-    ├── lgbm_loss_curve.png
-    ├── lgbm_feature_importance.png
-    ├── forecast_vs_actual_apr_sep.png
-    ├── scatter_actual_vs_predicted.png
-    └── nrmse_comparison.png
-```
 
 ---
 
-## ⚙️ Setup
-
-### Option 1 — Google Colab (Recommended)
-Upload all files to `/content/` and run notebooks top to bottom. Install dependencies in the first cell:
-```python
-!pip install -r requirements.txt
-```
-
-### Option 2 — Local
-```bash
-git clone https://github.com/<your-team>/solship_hackathon
-cd solship_hackathon
-pip install -r requirements.txt
-jupyter notebook
-```
-
----
 
 ## 🔬 Methodology
 
@@ -161,28 +112,6 @@ LGBMRegressor(
 )
 ```
 
-### XGBoost (Secondary Model)
-```python
-XGBRegressor(
-    n_estimators     = 2000,
-    learning_rate    = 0.02,
-    max_depth        = 8,
-    subsample        = 0.8,
-    colsample_bytree = 0.8,
-    min_child_weight = 5,
-    reg_alpha        = 0.1,
-    reg_lambda       = 1.0,
-    random_state     = 42,
-)
-```
-
-### Ensemble
-Weighted average using inverse-NRMSE weights from validation:
-```
-ensemble = w_xgb × XGBoost + w_lgbm × LightGBM
-w_xgb  = (1/NRMSE_xgb)  / (1/NRMSE_xgb + 1/NRMSE_lgbm)
-w_lgbm = (1/NRMSE_lgbm) / (1/NRMSE_xgb + 1/NRMSE_lgbm)
-```
 
 ---
 
@@ -192,9 +121,7 @@ w_lgbm = (1/NRMSE_lgbm) / (1/NRMSE_xgb + 1/NRMSE_lgbm)
 
 | Model | RMSE (kW) | MAE (kW) | NRMSE (%) |
 |---|---|---|---|
-| XGBoost | — | — | — |
 | LightGBM | 0.0569 | 0.0185 | **3.5589** |
-| Ensemble | — | — | — |
 
 ### Test Results
 
@@ -221,11 +148,11 @@ w_lgbm = (1/NRMSE_lgbm) / (1/NRMSE_xgb + 1/NRMSE_lgbm)
 
 ## 📤 Day 1 Submission Checklist
 
-- [x] Working forecaster (LightGBM + XGBoost + Ensemble)
+- [x] Working forecaster (LightGBM)
 - [x] RMSE / MAE / NRMSE on 2025 test set (April & September)
 - [x] No training or tuning on 2025 data
 - [x] All features fully causal (lags ≥ 24 hours)
-- [ ] Written optimizer formulation (to be submitted by 17:00)
+- [ ] Written optimizer formulation 
 
 ### Written Optimizer Formulation (Day 1 Required)
 
@@ -268,13 +195,11 @@ load(t) = pv(t) + P_grid(t) + P_battery(t)
 
 ---
 
-## 👥 Team
-- Zewail City of Science and Technology
-- Nanotechnology and Electronics Engineering
+
 
 ## 📅 Event
 - **Day 1:** EDA, Forecasting, Optimizer Formulation
-- **Day 2:** Optimizer Implementation, Surprise Dataset, Presentations
+
 
 ---
 
